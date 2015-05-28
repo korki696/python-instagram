@@ -92,7 +92,7 @@ def bind_method(**config):
             if self.with_next_url:
                 print "Next URL"
                 parsed = urlparse.urlparse(self.with_next_url)
-                self.parameters['cursor'] = urlparse.parse_qs(parsed.query)['cursor']
+                self.parameters['cursor'] = urlparse.parse_qs(parsed.query)['cursor'][0]
                 print urlparse.parse_qs(parsed.query)['cursor'][0]
 
         def _build_path(self):
