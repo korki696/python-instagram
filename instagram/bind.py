@@ -7,7 +7,6 @@ from hashlib import sha256
 import six
 from six.moves.urllib.parse import quote
 import sys
-import urlparse
 
 re_path_template = re.compile('{\w+}')
 
@@ -89,11 +88,6 @@ def bind_method(**config):
             if 'user_id' in self.accepts_parameters and not 'user_id' in self.parameters \
                and not self.requires_target_user:
                 self.parameters['user_id'] = 'self'
-            if self.with_next_url:
-                print "Next URL"
-                parsed = urlparse.urlparse(self.with_next_url)
-                self.parameters['cursor'] = urlparse.parse_qs(parsed.query)['cursor'][0]
-                print urlparse.parse_qs(parsed.query)['cursor'][0]
 
         def _build_path(self):
             for variable in re_path_template.findall(self.path):
