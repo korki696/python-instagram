@@ -90,8 +90,10 @@ def bind_method(**config):
                and not self.requires_target_user:
                 self.parameters['user_id'] = 'self'
             if self.with_next_url:
+                print "Next URL"
                 parsed = urlparse.urlparse(self.with_next_url)
                 self.parameters['cursor'] = urlparse.parse_qs(parsed.query)['cursor']
+                print urlparse.parse_qs(parsed.query)['cursor']
 
         def _build_path(self):
             for variable in re_path_template.findall(self.path):
